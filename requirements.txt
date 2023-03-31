@@ -1,0 +1,8 @@
+openai-whisper
+SpeechRecognition
+pydub
+click
+pyaudio
+torch
+numpy
+transformers
