@@ -8,6 +8,7 @@ To use the chatbot robot, follow these steps:
 
 - Clone this repository to your local machine.
 
+- create a new virtual env with python = 3.10 (3.11 is not supported!)
 
 - Install the required dependencies by running `pip install -r requirements.txt`.
 
@@ -17,4 +18,11 @@ To use the chatbot robot, follow these steps:
 ## Usage
 At the current state of the work, the model can be used via terminal.
 In the near future a verbal interaction mode will be integrated.
+
+::: mermaid
+
+flowchart LR
+
+    id1((Mic.)) -- /Speech2Text/speech:i --- Speech2Text -- /Speech2Text/text:o --- iChat  -- iChat/answer:o --- id2((User))
+:::
 
