@@ -1,8 +1,8 @@
 openai-whisper
 SpeechRecognition
-pydub
-click
+pydub 
 pyaudio
 torch
 numpy
 transformers
+pyinstaller

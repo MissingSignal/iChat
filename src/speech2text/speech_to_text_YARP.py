@@ -9,7 +9,6 @@ import queue
 import tempfile
 import os
 import threading
-import click
 import torch
 import numpy as np
 

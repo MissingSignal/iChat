@@ -66,6 +66,8 @@ class Chat_Module(yarp.RFModule):
         # here we load the context from a .ini file
         # this file contains the text used to answer the questions
         self.context = rf.find("CONTEXT").asString()
+
+        self.context = "I'm 10 years old and I live in Genoa"
         #print context inside a box in the terminal
         print("#"*100)
         print(self.context)
