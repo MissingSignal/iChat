@@ -102,11 +102,11 @@ class Speech2text_Module(yarp.RFModule):
         # IMPORTANT:
         # here we load the context from a .ini file
         # this file contains the text used to answer the questions
-        # self.context = rf.find("CONTEXT").asString()
+        self.context = rf.find("CONTEXT").asString()
         # #print context inside a box in the terminal
-        # print("#"*100)
-        # print(self.context)
-        # print("#"*100)
+        print("#"*100)
+        print(self.context)
+        print("#"*100)
 
         #info("Initialization complete")
         print("Initialization complete")

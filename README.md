@@ -1,28 +1,56 @@
-## iChat
-This repository contains a chatbot model for iCub. 
-The chatbot model allows users to freely chat with the robot using natural language.
+# iChat
+This repository contains a conversational framework for iCub. 
+This app allows users to freely chat with the robot using natural language.
+
+## Modules
+The chatbot model is composed of the following modules:
+### 1. yarpdev
+The yarpdev module is used to start the recording of the audio stream from the microphone.
+By default it is run on iCub-head but you are warmly encouraged to run it on a differente pc, hence to use an external microphone.
+
+### 2. Speech2Text
+The Speech2Text module is used to convert the audio stream into text. It is based on [Open-AI whisper](https://github.com/openai/whisper), a speech-to-text model that is able to convert speech into text in real-time.
+
+### 3. iCubQA
+This is a conversational agent that is able to answer questions.
+Given a context file (i.e. a file containing a list of questions and answers), the agent is able to answer questions about the iCub robot.
+It is based on [HuggingFace's transformers](https://huggingface.co/) library.
+
+### 4. sentimentAnalysis
+This module is used to perform sentiment analysis on the user's vocal input.
 
 ## Installation
-To use the chatbot robot, follow these steps:
+- Clone this repository to your local machine ( preferably in  `../src/robot/CognitiveInteraction` ).
 
+- Compile and and install the framwork:
+```bash
+cd ../iChat
 
-- Clone this repository to your local machine.
+mkdir build && cd build
 
-- create a new virtual env with python = 3.10 (3.11 is not supported!)
+cmake ../
 
-- Install the required dependencies by running `pip install -r requirements.txt`.
+make
 
+make install
+```
 
-- Run the `iChat.py` script to start the chatbot.
+- Customize the `iChat.xml.template` in the `ICUBCONTRIB` folder with your own paths and save it as `iChat.xml`
 
-## Usage
-At the current state of the work, the model can be used via terminal.
-In the near future a verbal interaction mode will be integrated.
+- Run the app from yarpmanager
+
+***Note:*** *the new virtual env must have python = 3.10 (3.11 is not yet supported by whisper!)*
+
+## Architecture
+At the moment the architecture is composed of the following modules:
 
 ::: mermaid
 
-flowchart LR
-
-    id1((Mic.)) -- /Speech2Text/speech:i --- Speech2Text -- /Speech2Text/text:o --- iChat  -- iChat/answer:o --- id2((User))
+flowchart TD
+    A(Microphone) --> B[speech2text]
+    B --> C[sentiment Analysis]
+    B --> E[iCub QA]
+    E --> D(Acapella)
+    C --> F(FaceExpressionDuo)
 :::
 

@@ -3,7 +3,7 @@ import yarp
 
 from transformers import pipeline
 import os
-os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python" #workaround for incompatibility with protobuf versions >3.2
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python" #workaround for incompatibility with protobuf versions >3.2, execution might be slower
 
 
 # To print on the terminal

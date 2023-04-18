@@ -1,0 +1,63 @@
+<application>
+
+    <name> iChat </name>
+
+    <!-->  
+    MODULES.    
+    <!-->
+    <module>
+        <name> yarpdev </name>
+        <parameters> --device AudioRecorderWrapper --subdevice portaudioRecorder --start </parameters>
+        <node> icub-head </node>
+    </module>
+
+    <module>
+        <name> iCubQA </name>
+        <parameters> --context iChat.ini </parameters>
+        <node> localhost </node>
+    </module>
+
+
+    <module>
+        <name> speech2text </name>
+        <parameters> --model base --mutilingual False </parameters>
+        <node> localhost </node>
+    </module>
+
+    <module>
+        <name> sentimentAnalysis </name>
+        <parameters> </parameters>
+        <node> localhost </node>
+    </module>
+
+
+    <!-->  
+    CONNECTIONS.
+    <!-->
+    
+    <!-->  
+    aggiungi connessione da porta microfono, per ora hard coded
+    <!-->
+    
+    <connection>
+        <from> /speech2text/text:i  </from>
+        <to>   /iCubQA/question:i </to>
+        <protocol> tcp </protocol>
+    </connection>
+
+    <connection>
+        <from> /iCubQA/answer:o  </from>
+        <to>   /acapela/speech:i </to>
+        <protocol> tcp </protocol>
+    </connection>
+
+
+    <connection>
+        <from> /speech2text/text:i   </from>
+        <to>   /sentimentAnalysis/sentiment:o </to>
+        <protocol> tcp </protocol>
+    </connection>
+
+
+
+</application>
