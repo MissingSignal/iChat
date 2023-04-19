@@ -30,8 +30,9 @@ set(ICUB_APPLICATIONS_PREFIX "$ENV{ICUB_ROOT}" CACHE PATH "Application path pref
 # Generate the virtualenv and ensure it's up to date.
 add_custom_command(
         OUTPUT ${NAME_VENV}
-        COMMAND ${VIRTUALENV} -p /usr/bin/python3 ${NAME_VENV} #TODO: spicify python 3.10
+        COMMAND ${VIRTUALENV} -p /usr/bin/python3.10 ${NAME_VENV} #TODO: spicify python 3.10
 )
+
 # Install requirements from .txt file
 add_custom_command(
         OUTPUT requirements
@@ -50,15 +51,19 @@ add_custom_command(
 
 # Custom targets for CMake
 # Create a virtual-env and install all requirements
-#add_custom_target(build-python  ALL
-#        DEPENDS binary
-#        SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/requirements.txt
-#        )
-
-
+add_custom_target(build-python  ALL
+        DEPENDS requirements #was binary
+        SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/requirements.txt
+        )
 
 #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/${PROJECTNAME} PERMISSIONS ${PROGRAM_PERMISSIONS_DEFAULT} DESTINATION bin)
 
 # tutti i venv di support sono installati in ${CMAKE_CURRENT_BINARY_DIR}/venv
 # per lanciare piu moduli che convididono lo stesso venv bisogna lanciare i moduli .py dando come parametro l'env da usare
 # esempio: python3 main.py --venv myvenv 
+
+
+####### LUCA #########
+#add_subdirectory(speech2text)
+add_subdirectory(iCubQA)
+#add_subdirectory(sentimentAnalysis)
