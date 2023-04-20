@@ -47,7 +47,7 @@ class Chat_Module(yarp.RFModule):
 
         # Module parameters
         self.module_name = rf.check("name",
-                                    yarp.Value("iCub_QA"),
+                                    yarp.Value("iCubQA"),
                                     "module name (string)").asString()
 
         # Opening Ports
@@ -65,9 +65,9 @@ class Chat_Module(yarp.RFModule):
         # IMPORTANT:
         # here we load the context from a .ini file
         # this file contains the text used to answer the questions
-        self.context = rf.find("CONTEXT").asString()
+        self.context = rf.find("context").asString()
 
-        self.context = "I'm 10 years old and I live in Genoa"
+        #self.context = "I'm 10 years old and I live in Genoa"
         #print context inside a box in the terminal
         print("#"*100)
         print(self.context)
@@ -158,8 +158,8 @@ if __name__ == '__main__':
 
     rf = yarp.ResourceFinder()
     rf.setVerbose(True)
-    rf.setDefaultContext('iCub_QA') # where to find .ini files for this application
-    rf.setDefaultConfigFile('iCub_QA_context.ini') # name of the default .ini file
+    rf.setDefaultContext('iChat') # where to find .ini files for this application
+    rf.setDefaultConfigFile('iCubQA.ini') # name of the default .ini file NO, NAME OF THE FOLDER
 
     if rf.configure(sys.argv):
         Module.runModule(rf)

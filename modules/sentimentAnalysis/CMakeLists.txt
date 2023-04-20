@@ -3,7 +3,7 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 # source di ogni cartella, ogni cartella figlio (modules) ha un file .sh che attiva il venv (ereditato) e poi esegue il file .py
-set(MODULE_NAME iCubQA) #custom name of the module #TODO: change this to the name of the script
+set(MODULE_NAME sentimentAnalysis) #custom name of the module #TODO: change this to the name of the script
 
 message("Installing ${MODULE_NAME}")
 

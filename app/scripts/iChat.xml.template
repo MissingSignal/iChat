@@ -40,7 +40,7 @@
     <!-->
     
     <connection>
-        <from> /speech2text/text:i  </from>
+        <from> /speech2text/text:o  </from>
         <to>   /iCubQA/question:i </to>
         <protocol> tcp </protocol>
     </connection>

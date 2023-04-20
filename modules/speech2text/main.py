@@ -92,9 +92,9 @@ class Speech2text_Module(yarp.RFModule):
         ### Opening Ports ###
         # Create handle port to read message
         self.handle_port.open('/' + self.module_name)
-        # port to receive the textual questions
+        # port to receive the verbal questions
         self.question_port.open('/' + self.module_name + '/speech:i')
-        # Speech
+        # text transcription port
         self.events_output.open('/' + self.module_name + '/text:o')
         #####################
         print("ports opened")
@@ -102,17 +102,9 @@ class Speech2text_Module(yarp.RFModule):
         # IMPORTANT:
         # here we load the context from a .ini file
         # this file contains the text used to answer the questions
-        self.context = rf.find("CONTEXT").asString()
-        # #print context inside a box in the terminal
-        print("#"*100)
-        print(self.context)
-        print("#"*100)
+        self.context = rf.find("context").asString()
 
-        #info("Initialization complete")
-        print("Initialization complete")
-
-        # while True:
-        #     print(self.result_queue.get())
+        info("Initialization complete")
 
         return True
   
@@ -226,7 +218,7 @@ class Speech2text_Module(yarp.RFModule):
 
             if not verbose:
                 predicted_text = result["text"]
-                result_queue.put_nowait("You said: " + predicted_text)
+                result_queue.put_nowait(predicted_text)
             else:
                 result_queue.put_nowait(result)
 

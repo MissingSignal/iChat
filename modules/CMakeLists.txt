@@ -1,3 +1,7 @@
+# Copyright: (C) Robotics Brain and Cognitive Sciences (RBCS) - Istituto Italiano di Tecnologia
+# Authors: Luca Garello
+# CopyPolicy: Released under the terms of the GNU GPL v2.0.
+
 cmake_minimum_required(VERSION 3.12)
 
 set(NAME_VENV ${PROJECT_NAME}_venv)
@@ -16,16 +20,7 @@ endif()
 
 set(VIRTUALENV ${VIRTUALENV})
 
-# Find iCubCONTRIB packages
-# FIND_PACKAGE(ICUBcontrib REQUIRED)
-# list(APPEND CMAKE_MODULE_PATH ${ICUBCONTRIB_MODULE_PATH})
-# include(ICUBcontribHelpers)
-# include(ICUBcontribOptions)
-# icubcontrib_set_default_prefix()
-
-
 set(ICUB_APPLICATIONS_PREFIX "$ENV{ICUB_ROOT}" CACHE PATH "Application path prefix")
-
 
 # Generate the virtualenv and ensure it's up to date.
 add_custom_command(
@@ -41,14 +36,6 @@ add_custom_command(
         COMMAND ./${NAME_VENV}/bin/pip install -r requirements.txt
 )
 
-# Generate the binary using pyinstaller and put the binary in the bin folder
-#add_custom_command(
-#        OUTPUT binary
-#        DEPENDS ${NAME_VENV} requirements
-#        COMMAND ./${NAME_VENV}/bin/pyinstaller  --onefile ${CMAKE_CURRENT_SOURCE_DIR}/main.py --distpath bin -n ${PROJECTNAME}
-#)
-
-
 # Custom targets for CMake
 # Create a virtual-env and install all requirements
 add_custom_target(build-python  ALL
@@ -56,14 +43,14 @@ add_custom_target(build-python  ALL
         SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/requirements.txt
         )
 
+
 #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/${PROJECTNAME} PERMISSIONS ${PROGRAM_PERMISSIONS_DEFAULT} DESTINATION bin)
 
-# tutti i venv di support sono installati in ${CMAKE_CURRENT_BINARY_DIR}/venv
-# per lanciare piu moduli che convididono lo stesso venv bisogna lanciare i moduli .py dando come parametro l'env da usare
-# esempio: python3 main.py --venv myvenv 
+# set PATH_TO_VENV so that the python modules can find the virtualenv
+set(PATH_TO_VENV ${CMAKE_CURRENT_BINARY_DIR}/${NAME_VENV})
+message(STATUS "PATH_TO_VENV: ${PATH_TO_VENV}")
 
 
-####### LUCA #########
-#add_subdirectory(speech2text)
+add_subdirectory(speech2text)
 add_subdirectory(iCubQA)
-#add_subdirectory(sentimentAnalysis)
+add_subdirectory(sentimentAnalysis)
