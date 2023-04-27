@@ -22,13 +22,13 @@ class Chat_Module(yarp.RFModule):
         yarp.RFModule.__init__(self)
         self.process = True
 
-        #self.model_name = "deepset/roberta-base-squad2" ---old
+        self.model_name = "deepset/roberta-base-squad2"
 
         # initialize Q/A pipeline defined by model and tokenizer
-        #self.nlp = pipeline('question-answering', model=self.model_name, tokenizer=self.model_name) ---old
+        self.nlp = pipeline('question-answering', model=self.model_name, tokenizer=self.model_name)
 
         #initialize pipeline
-        self.nlp = pipeline("question-answering")
+        #self.nlp = pipeline("question-answering")
 
         # handle port for the RFModule
         self.handle_port = yarp.Port()
