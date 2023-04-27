@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import scrolledtext
 import threading
 
@@ -15,6 +16,7 @@ class ChatWindow:
 
         # Create input field for user to enter messages
         self.input_field = tk.Entry(master)
+        # make input field rounded
         self.input_field.grid(row=1, column=0, sticky="ew")
         self.input_field.configure(font=("Arial", 12))
 
