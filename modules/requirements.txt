@@ -6,3 +6,5 @@ torch
 numpy
 transformers
 pyinstaller
+sentencepiece
+protobuf == 3.20.1

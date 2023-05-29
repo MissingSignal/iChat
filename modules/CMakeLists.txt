@@ -25,7 +25,7 @@ set(ICUB_APPLICATIONS_PREFIX "$ENV{ICUB_ROOT}" CACHE PATH "Application path pref
 # Generate the virtualenv and ensure it's up to date.
 add_custom_command(
         OUTPUT ${NAME_VENV}
-        COMMAND ${VIRTUALENV} -p /usr/bin/python3.10 ${NAME_VENV} #TODO: spicify python 3.10
+        COMMAND ${VIRTUALENV} -p /usr/bin/python3.8 ${NAME_VENV} #TODO: spicify python 3.10
 )
 
 # Install requirements from .txt file

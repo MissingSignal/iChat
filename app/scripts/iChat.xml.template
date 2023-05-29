@@ -47,14 +47,14 @@
 
     <connection>
         <from> /iCubQA/answer:o  </from>
-        <to>   /acapela/speech:i </to>
+        <to>   /acapelaSpeak/speech:i </to>
         <protocol> tcp </protocol>
     </connection>
 
 
     <connection>
-        <from> /speech2text/text:i   </from>
-        <to>   /sentimentAnalysis/sentiment:o </to>
+        <from> /speech2text/text:o   </from>
+        <to>   /iCub_Sentiment_Analysis/sentiment:o </to>
         <protocol> tcp </protocol>
     </connection>
 
