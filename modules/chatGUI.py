@@ -10,21 +10,21 @@ class ChatWindow:
         master.title("Chat Window")
 
         # Create text area for the chat messages
-        self.text_area = scrolledtext.ScrolledText(master)
+        self.text_area = scrolledtext.ScrolledText(master, highlightthickness=0, borderwidth=0, wrap="word", state="disabled")
         self.text_area.grid(row=0, column=0, columnspan=2, sticky="nsew")
-        self.text_area.configure(font=("Arial", 12))
+        self.text_area.configure(font=("Arial", 24))
 
         # Create input field for user to enter messages
         self.input_field = tk.Entry(master)
         # make input field rounded
         self.input_field.grid(row=1, column=0, sticky="ew")
-        self.input_field.configure(font=("Arial", 12))
+        self.input_field.configure(font=("Arial", 24))
 
         # Bind the Enter key to the send message function
         self.input_field.bind("<Return>", self.send_message)
 
         # Create send button
-        self.send_button = tk.Button(master, text="Send", command=self.send_message)
+        self.send_button = tk.Button(master, text="Send", command=self.send_message, height=1, width=10)
         self.send_button.grid(row=1, column=1, sticky="e")
 
         # Configure grid to resize with window
@@ -45,7 +45,9 @@ class ChatWindow:
         self.input_field.delete(0, tk.END)
 
         # Add the message to the chat window
+        self.text_area.configure(state="normal")
         self.text_area.insert(tk.END, f"You: {message}\n")
+        self.text_area.configure(state="disabled")
 
 # Define function to populate the chat window with messages
 def populate_chat(chat_window):
@@ -81,8 +83,9 @@ thread = threading.Thread(target=populate_chat, args=(chat_window,))
 thread.daemon = True
 thread.start()
 
-# Set the size of the window
-root.geometry("400x400")
+# Set the minimum size of the window
+root.minsize(450, 300)
+root.geometry("800x600")
 
 # Run the GUI loop
 while True:
@@ -91,8 +94,7 @@ while True:
     height = root.winfo_height()
 
     # Calculate the font size based on the window size
-    font_size = min(int(height / 25), int(width / 50))
-    font = ("Arial", font_size)
+    font = ("Arial", int(height / 10))
 
     # Update the font size for the chat window and input field
     chat_window.text_area.configure(font=font)
